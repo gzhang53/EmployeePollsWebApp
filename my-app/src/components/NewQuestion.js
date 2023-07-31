@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { connect } from "react-redux";
+import { handleAddQuestion } from "../actions/questions";
+import { useNavigate } from "react-router-dom";
 
-const NewQuestion = () => {
+const NewQuestion = ({dispatch, authedUser}) => {
+  const navigate = useNavigate();
   const [optionOne, setoptionOne] = useState("");
   const [optionTwo, setoptionTwo] = useState("");
 
@@ -16,12 +20,14 @@ const NewQuestion = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // todo: Add Question to store
-    console.log("Option one: ", optionOne);
-    console.log("Option two: ", optionTwo);
+    dispatch(handleAddQuestion({
+      optionOneText: optionOne,
+      optionTwoText: optionTwo,
+      author: authedUser
+    }));
     setoptionOne("");
     setoptionTwo("");
+    navigate("/");
   };
 
   return (
@@ -54,4 +60,8 @@ const NewQuestion = () => {
   );
 };
 
-export default NewQuestion;
+const mapStateToProps = ({ authedUser }) => ({
+  authedUser
+});
+
+export default connect(mapStateToProps)(NewQuestion);
