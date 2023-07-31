@@ -1,16 +1,17 @@
 import { connect } from "react-redux";
 import { formatQuestion, formatDate } from "../utils/helpers";
+import { Link } from "react-router-dom";
 
 const Question = (props) => {
   if (props.question === null) {
-    return <p>This Question doesn't existd</p>;
+    return <p>This Question doesn't exist</p>;
   }
 
-  const { name, timestamp, optionOne, optionTwo, avatar, authedUser } =
+  const { name, timestamp, optionOne, optionTwo, avatar, authedUser, id } =
     props.question;
 
   return (
-    <div className="question">
+    <Link to={`/questions/${id}`} className="question">
       <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
       <div className="question-info">
         <div>
@@ -20,7 +21,7 @@ const Question = (props) => {
           <p>{optionTwo.text}</p> */}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
