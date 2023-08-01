@@ -1,13 +1,17 @@
 import { connect } from "react-redux";
 import { formatQuestion, formatDate } from "../utils/helpers";
+import { useParams } from "react-router-dom";
 
-const QuestionPage = (props) => {
-  if (props.question === null) {
+const QuestionPage = ({authedUser, questions, users}) => {
+  const { id } = useParams();
+  const question = questions[id];
+
+  if (question === null) {
     return <p>This Question doesn't exist</p>;
   }
 
-  const { name, optionOne, optionTwo, avatar, authedUser } =
-    props.question;
+  const formattedQuestion = formatQuestion(question, users[question.author], authedUser)
+  const { name, optionOne, optionTwo, avatar } = formattedQuestion;
 
   return (
     <div className="question">
@@ -23,14 +27,11 @@ const QuestionPage = (props) => {
   );
 };
 
-const mapStateToProps = ({ authedUser, users, questions }, { id }) => {
-  const question = questions[id];
-  console.log("QuestionPage: " + id);
+const mapStateToProps = ({ authedUser, users, questions }) => {
   return {
     authedUser,
-    question: question
-      ? formatQuestion(question, users[question.author], authedUser)
-      : null,
+    questions,
+    users
   };
 };
 

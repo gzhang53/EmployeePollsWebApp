@@ -98,3 +98,4 @@ Your code will talk to the database via 4 methods:
 
 # References
 - https://stackoverflow.com/questions/25800067/how-to-divide-list-in-a-single-ul-into-3-columns
+- https://reactrouter.com/en/main/hooks/use-params
