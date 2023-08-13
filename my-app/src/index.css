@@ -68,6 +68,75 @@ li {
   text-decoration: none;
 }
 
+/* Style for the poll container */
+.poll-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Style for the poll options container */
+.poll-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Style for each option container */
+.poll-option {
+  position: relative; /* Make the option div a reference for positioning */
+  width: 48%; /* Adjust as needed */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Add rounded edges */
+  box-sizing: border-box;
+}
+
+/* Style for each option container */
+.background-voted {
+  background-color: #4ce52d; /* Background color for poll-option */
+}
+
+/* Style for each option container */
+.background-not-voted {
+  background-color: #ffffff; /* Background color for poll-option */
+}
+
+/* Style for text area */
+.poll-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 40px; /* Add space between text area and button */
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Style for the button */
+.poll-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #63B2AC;
+  color: white;
+  border: none;
+  border-radius: 0 0 8px 8px; /* Rounded edges only at the bottom */
+  cursor: pointer;
+}
+
+/* Add some spacing */
+.poll-option + .poll-option {
+  margin-left: 2%;
+}
+
+.avatar-big {
+  max-width: 100%;
+  height: 200px;
+  display: block;
+  margin: 0 auto 20px;
+}
+
 .avatar {
   height: 50px;
   border-radius: 25px;

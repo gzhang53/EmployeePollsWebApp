@@ -99,3 +99,19 @@ Your code will talk to the database via 4 methods:
 # References
 - https://stackoverflow.com/questions/25800067/how-to-divide-list-in-a-single-ul-into-3-columns
 - https://reactrouter.com/en/main/hooks/use-params
+
+# Redux references
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer
+- https://redux.js.org/usage/structuring-reducers/initializing-state
+- https://redux.js.org/usage/structuring-reducers/normalizing-state-shape
+- https://react-redux.js.org/using-react-redux/connect-mapstate
+- https://react.dev/reference/react/createContext#consumer
+- https://designcode.io/react-hooks-handbook-spread-attributes
+- https://redux.js.org/usage/writing-logic-thunks
+- https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators
+- https://javascript.info/async-await
+- https://javascript.info/promise-basics
+- Dispatch an action (created using action creator). Inside dispatch function, call reducer on the action to get the new state. Reducers modify state based on the actions returned by action creators
+
+# CSS references
+- https://sabe.io/blog/react-multiple-classes#how-to-add-multiple-classes-conditionally-in-react

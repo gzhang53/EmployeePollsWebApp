@@ -12,6 +12,15 @@ function addQuestion(question) {
   };
 }
 
+function addQuestionAnswer({id, option, authedUser}) {
+  return {
+    type: ADD_QUESTION_ANSWER,
+    id,
+    option,
+    authedUser
+  };
+}
+
 export function handleAddQuestion(question) {
   return (dispatch, getState) => {
     dispatch(showLoading());
@@ -32,7 +41,13 @@ export function handleAddQuestionAnswer(question, answer) {
       authedUser,
       qid: question.id,
       answer,
-    }).then(() => dispatch(hideLoading()));
+    })
+    .then(() => dispatch(addQuestionAnswer({
+      id: question.id,
+      option: answer,
+      authedUser
+    })))
+    .then(() => dispatch(hideLoading()));
   };
 }
 
