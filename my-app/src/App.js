@@ -9,6 +9,7 @@ import QuestionPage from "./components/QuestionPage";
 import Leaderboard from "./components/Leaderboard";
 import Nav from "./components/Nav";
 import { Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
 
 function App(props) {
   useEffect(() => {
@@ -17,26 +18,37 @@ function App(props) {
 
   return (
     <div>
-      <Fragment>
+      {props.authedUser !== null && (<Fragment>
         <LoadingBar />
         <div className="container">
           <Nav />
-          {props.loading === true ? null : (
             <Routes>
               <Route path="/" exact element={<Dashboard />} />
               <Route path="/questions/:id" element={<QuestionPage />} />
               <Route path="/add" element={<NewQuestion />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
             </Routes>
-          )}
         </div>
-      </Fragment>
+      </Fragment>)}
+      {props.authedUser === null && <LoadingBar />}
+      {props.authedUser === null && props.loading === false && (<Fragment>
+        <div className="container">
+            <Routes>
+              <Route path="/" exact element={<Login />} />
+              <Route path="/questions/:id" element={<Login />} />
+              <Route path="/add" element={<Login />} />
+              <Route path="/leaderboard" element={<Login />} />
+            </Routes>
+        </div>
+      </Fragment>)}
+
     </div>
   );
 }
 
-const mapStateToProps = ({ authedUser }) => ({
-  loading: authedUser === null,
+const mapStateToProps = ({ authedUser, loadingBar }) => ({
+  loading: loadingBar != null && loadingBar.default === 1, // this makes sure that loadingBar state changes to hidden before our login form is shown
+  authedUser
 });
 
 export default connect(mapStateToProps)(App);

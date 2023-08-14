@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {handleLogout} from "../actions/authedUser";
 
-const Nav = () => {
+const Nav = ({ dispatch, authedUser }) => {
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(handleLogout());
+  };
+  
   return (
     <nav className="nav">
       <ul>
@@ -13,9 +20,21 @@ const Nav = () => {
         <li>
           <Link to="/leaderboard">Leaderboard</Link>
         </li>
+        <li>
+          User: {authedUser}
+        </li>
+        <li>
+          <Link onClick={logout}>Logout</Link>
+        </li>
       </ul>
     </nav>
   );
 };
 
-export default Nav;
+const mapStateToProps = ({ authedUser }) => {
+  return {
+    authedUser,
+  };
+};
+
+export default connect(mapStateToProps)(Nav);
