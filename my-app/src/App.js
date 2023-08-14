@@ -10,6 +10,7 @@ import Leaderboard from "./components/Leaderboard";
 import Nav from "./components/Nav";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
+import Error404 from "./components/Error404";
 
 function App(props) {
   useEffect(() => {
@@ -27,6 +28,7 @@ function App(props) {
               <Route path="/questions/:id" element={<QuestionPage />} />
               <Route path="/add" element={<NewQuestion />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/Error404" element={<Error404 />} />
             </Routes>
         </div>
       </Fragment>)}
@@ -38,6 +40,7 @@ function App(props) {
               <Route path="/questions/:id" element={<Login />} />
               <Route path="/add" element={<Login />} />
               <Route path="/leaderboard" element={<Login />} />
+              <Route path="/Error404" element={<Error404 />} />
             </Routes>
         </div>
       </Fragment>)}

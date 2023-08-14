@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { formatQuestion, formatDate } from "../utils/helpers";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { handleAddQuestionAnswer } from "../actions/questions";
 
@@ -22,9 +22,8 @@ const QuestionPage = ({dispatch, authedUser, questions, users}) => {
   }
 
   const question = questions[id];
-
-  if (question === null) {
-    return <p>This Question doesn't exist</p>;
+  if (question == null) {
+    return <Navigate to="/Error404"/>; // need to return this component instead of use navigate
   }
 
   const formattedQuestion = formatQuestion(question, users[question.author], authedUser)
