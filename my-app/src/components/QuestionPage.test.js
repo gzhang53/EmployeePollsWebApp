@@ -24,9 +24,9 @@ describe("QuestionPage", () => {
             console.log(answerId);
             console.log(answeredPolls[answerId]);
             const component = render(
-                <Provider store={store} id={answerId}>
+                <Provider store={store}>
                     <Router>
-                        <QuestionPage/>
+                        <QuestionPage id={answerId}/>
                     </Router>
                 </Provider>
             );
