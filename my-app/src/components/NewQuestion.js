@@ -38,6 +38,7 @@ const NewQuestion = ({dispatch, authedUser}) => {
         {/* todo: Redirect to / if submitted */}
         <h3 className="center">First Option</h3>
         <textarea
+          data-testid="option-one"
           placeholder="Option One"
           value={optionOne}
           onChange={handleoptionOne}
@@ -46,13 +47,14 @@ const NewQuestion = ({dispatch, authedUser}) => {
         />
         <h3 className="center">Second Option</h3>
         <textarea
+          data-testid="option-two"
           placeholder="Option Two"
           value={optionTwo}
           onChange={handleoptionTwo}
           className="textarea"
           maxLength={280}
         />
-        <button className="btn" type="submit" disabled={optionOne === "" || optionTwo === ""}>
+        <button data-testid="submit-button" className="btn" type="submit" disabled={optionOne === "" || optionTwo === ""}>
           Submit
         </button>
       </form>

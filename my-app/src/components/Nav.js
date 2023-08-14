@@ -12,19 +12,19 @@ const Nav = ({ dispatch, authedUser }) => {
     <nav className="nav">
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link data-testid="home" to="/">Home</Link>
         </li>
         <li>
-          <Link to="/add">New Poll</Link>
+          <Link data-testid="new-poll" to="/add">New Poll</Link>
         </li>
         <li>
-          <Link to="/leaderboard">Leaderboard</Link>
+          <Link data-testid="leaderboard" to="/leaderboard">Leaderboard</Link>
         </li>
-        <li>
+        <li data-testid='authedUser'>
           User: {authedUser}
         </li>
         <li>
-          <Link onClick={logout}>Logout</Link>
+          <Link data-testid='logout' onClick={logout}>Logout</Link>
         </li>
       </ul>
     </nav>

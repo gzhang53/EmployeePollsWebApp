@@ -56,11 +56,11 @@ const QuestionPage = ({dispatch, authedUser, questions, users}) => {
     {hasVoted && (<div className="poll-options">
       <div className={`poll-option ${hasVotedOptionOne ? 'background-voted' : 'background-not-voted'}`}>
         <p>{optionOne.text}</p>
-        <p>{optionOneText}</p>
+        <p data-testid="optionOne">{optionOneText}</p>
       </div>
       <div className={`poll-option ${hasVotedOptionTwo ? 'background-voted' : 'background-not-voted'}`}>
         <p>{optionTwo.text}</p>
-        <p>{optionTwoText}</p>
+        <p data-testid="optionTwo">{optionTwoText}</p>
       </div>
     </div>)}
   </div>

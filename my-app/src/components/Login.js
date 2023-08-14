@@ -27,9 +27,9 @@ const Login = ({dispatch}) => {
         <div className="login-container">
             <h1>Employee Polls</h1>
             <form className="login-form" onSubmit={handleSubmit}>
-            <input type="text" className="login-input" placeholder="Username" value={username} onChange={handleUsername}/>
-            <input type="password" className="login-input" placeholder="Password" value={password} onChange={handlePassword}/>
-            <button type="submit" className="login-button">Login</button>
+            <input type="text" data-testid='username' className="login-input" placeholder="Username" value={username} onChange={handleUsername}/>
+            <input type="password" data-testid='password' className="login-input" placeholder="Password" value={password} onChange={handlePassword}/>
+            <button type="submit" data-testid='submit' className="login-button">Login</button>
             </form>
         </div>
     );
