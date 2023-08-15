@@ -40,7 +40,7 @@ const QuestionPage = ({dispatch, authedUser, questions, users}) => {
 
   return (
   <div className="poll-container">
-    <h3>Poll by {name}</h3>
+    <h3 data-testid="poll-header">Poll by {name}</h3>
     <img src={avatar} alt={`Avatar of ${name}`} className="avatar-big" />
     <h3>Would You Rather</h3>
     {!hasVoted && (<div className="poll-options">

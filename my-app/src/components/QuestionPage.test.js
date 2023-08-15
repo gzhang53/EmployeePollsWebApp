@@ -5,7 +5,7 @@ import reducer from "../reducers";
 import middleware from "../middleware";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { MemoryRouter, Routes, Route } from "react-router-dom";
 import {setAuthedUser} from "../actions/authedUser";
 import { handleInitialData } from "../actions/shared";
 
@@ -20,20 +20,32 @@ describe("QuestionPage", () => {
         const questions = store.getState().questions;
         const answeredPolls = store.getState().users[authedUser].answers;
 
+        // reference: https://medium.com/@bobjunior542/using-useparams-in-react-router-6-with-jest-testing-a29c53811b9e
+        // const component = render(
+        //     <Provider store={store}>
+        //         <MemoryRouter initialEntries={[`/questions/xj352vofupe1dqz9emx13r`]}>
+        //             <Routes>
+        //                 <Route path="/questions/:id" element={<QuestionPage />} />
+        //             </Routes>
+        //         </MemoryRouter>
+        //     </Provider>
+        // );
+
         Object.keys(answeredPolls).forEach((answerId) => {
             console.log(answerId);
             console.log(answeredPolls[answerId]);
             const component = render(
                 <Provider store={store}>
-                    <Router>
-                        <QuestionPage id={answerId}/>
-                    </Router>
+                    <MemoryRouter initialEntries={[`/questions/${answerId}`]}>
+                        <Routes>
+                            <Route path="/questions/:id" element={<QuestionPage />} />
+                        </Routes>
+                    </MemoryRouter>
                 </Provider>
             );
+            expect(component).toBeDefined();
+            expect(component.getByTestId('poll-header')).toBeInTheDocument();
             expect(component.getByTestId(answeredPolls[answerId])).toBeInTheDocument();
-            // console.log(component.getByTestId(answeredPolls[answerId]).textContent);
-            // expect(component).toBeDefined();
-
         });
     });
 });
