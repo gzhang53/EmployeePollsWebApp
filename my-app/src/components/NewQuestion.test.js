@@ -23,8 +23,8 @@ describe("NewQuestion", () => {
         expect(submitButton).toBeDisabled();
         var optionOne = component.getByTestId("option-one");
         var optionTwo = component.getByTestId("option-two");
-        fireEvent.change(optionOne, {target: {value: 'optionOne'}});
-        fireEvent.change(optionTwo, {target: {value: 'optionTwo'}});
+        fireEvent.change(optionOne, {target: {value: "optionOne"}});
+        fireEvent.change(optionTwo, {target: {value: "optionTwo"}});
         expect(optionOne.value).toEqual("optionOne");
         expect(optionTwo.value).toEqual("optionTwo");
         expect(submitButton).not.toBeDisabled();

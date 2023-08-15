@@ -30,7 +30,10 @@ describe("QuestionPage", () => {
                     </Router>
                 </Provider>
             );
-            console.log(component.getByTestId(answeredPolls[answerId]).textContent);
+            expect(component.getByTestId(answeredPolls[answerId])).toBeInTheDocument();
+            // console.log(component.getByTestId(answeredPolls[answerId]).textContent);
+            // expect(component).toBeDefined();
+
         });
     });
 });
