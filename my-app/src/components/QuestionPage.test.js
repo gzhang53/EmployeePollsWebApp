@@ -20,32 +20,28 @@ describe("QuestionPage", () => {
         const questions = store.getState().questions;
         const answeredPolls = store.getState().users[authedUser].answers;
 
-        // reference: https://medium.com/@bobjunior542/using-useparams-in-react-router-6-with-jest-testing-a29c53811b9e
-        // const component = render(
-        //     <Provider store={store}>
-        //         <MemoryRouter initialEntries={[`/questions/xj352vofupe1dqz9emx13r`]}>
-        //             <Routes>
-        //                 <Route path="/questions/:id" element={<QuestionPage />} />
-        //             </Routes>
-        //         </MemoryRouter>
-        //     </Provider>
-        // );
+        const answerId = Object.keys(answeredPolls)[0];
+        const optionOneVotes = questions[answerId].optionOne.votes.length;
+        const optionTwoVotes = questions[answerId].optionTwo.votes.length;
+        const totalVotes = optionOneVotes + optionTwoVotes;
+        const optionOneText = "Votes: " + optionOneVotes.toString() + " (" + Math.round(100 * optionOneVotes/totalVotes) +  "%)";
+        const optionTwoText = "Votes: " + optionTwoVotes.toString() + " (" + Math.round(100 * optionTwoVotes/totalVotes) +  "%)";
 
-        Object.keys(answeredPolls).forEach((answerId) => {
-            console.log(answerId);
-            console.log(answeredPolls[answerId]);
-            const component = render(
-                <Provider store={store}>
-                    <MemoryRouter initialEntries={[`/questions/${answerId}`]}>
-                        <Routes>
-                            <Route path="/questions/:id" element={<QuestionPage />} />
-                        </Routes>
-                    </MemoryRouter>
-                </Provider>
-            );
-            expect(component).toBeDefined();
-            expect(component.getByTestId('poll-header')).toBeInTheDocument();
-            expect(component.getByTestId(answeredPolls[answerId])).toBeInTheDocument();
-        });
+        // reference: https://medium.com/@bobjunior542/using-useparams-in-react-router-6-with-jest-testing-a29c53811b9e
+        const component = render(
+            <Provider store={store}>
+                <MemoryRouter initialEntries={[`/questions/${answerId}`]}>
+                    <Routes>
+                        <Route path="/questions/:id" element={<QuestionPage />} />
+                    </Routes>
+                </MemoryRouter>
+            </Provider>
+        );
+        expect(component).toBeDefined();
+        expect(component.getByTestId('poll-header')).toBeInTheDocument();
+        expect(component.getByTestId('optionOne')).toBeInTheDocument();
+        expect(component.getByTestId('optionTwo')).toBeInTheDocument();
+        expect(component.getByTestId('optionOne').textContent).toEqual(optionOneText);
+        expect(component.getByTestId('optionTwo').textContent).toEqual(optionTwoText);
     });
 });
