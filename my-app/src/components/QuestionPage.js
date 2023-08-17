@@ -6,19 +6,16 @@ import { handleAddQuestionAnswer } from "../actions/questions";
 
 const QuestionPage = ({dispatch, authedUser, questions, users}) => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const handleOptionOne = (e) => {
     e.preventDefault();
     dispatch(handleAddQuestionAnswer(question, "optionOne"));
-    navigate("/");
   }
 
   const handleOptionTwo = (e) => {
     e.preventDefault();
     console.log(authedUser)
     dispatch(handleAddQuestionAnswer(question, "optionTwo"));
-    navigate("/");
   }
 
   const question = questions[id];
