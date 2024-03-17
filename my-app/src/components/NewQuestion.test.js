@@ -25,6 +25,6 @@ describe("NewQuestion", () => {
         fireEvent.change(optionTwo, {target: {value: "optionTwo"}});
         expect(optionOne.value).toEqual("optionOne");
         expect(optionTwo.value).toEqual("optionTwo");
-        expect(submitButton).not.toBeDisabled();
+        expect(component.getByTestId("submit-button")).not.toBeDisabled();
     });
 });

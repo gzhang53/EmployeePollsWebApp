@@ -14,6 +14,9 @@ const QuestionPage = ({dispatch, authedUser, questions, users}) => {
 
   const { id } = useParams();
     const question = questions[id]
+    if (question == null) {
+      return <Navigate to="/Error"/>; // need to return this component instead of use navigate
+    }
     const handleOptionOne = (e) => {
         e.preventDefault();
         dispatch(handleAddQuestionAnswer(question, "optionOne"));
@@ -23,6 +26,7 @@ const QuestionPage = ({dispatch, authedUser, questions, users}) => {
         e.preventDefault();
         dispatch(handleAddQuestionAnswer(question, "optionTwo"));
       }
+      
     
     const { name, avatar } = formatQuestion(question, users[question.author], authedUser);
     const VotedOptionOne = question.optionOne.votes.includes(authedUser);
