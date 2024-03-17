@@ -1,73 +1,65 @@
+import './Dashboard.css'
 import { useState } from "react";
 import { connect } from "react-redux";
 import Question from "./Question";
 
+
 const Dashboard = (props) => {
-  // https://techwithcy.com/blog/2022-08-17-simple-toggle-view/
-  const [isToggle, setIsToggle] = useState(true);
   
-  const toggleChange = () => {
-    setIsToggle(!isToggle)
+  const [toggle, setToggle] = useState(true);
+  
+  const toggleView = () => {
+    setToggle(!toggle)
   }
 
-  const doneQns = props.questionIds.filter((id) => (
-    props.questions[id].optionOne.votes.includes(props.authedUser) || 
-    props.questions[id].optionTwo.votes.includes(props.authedUser)
-  ));
+  const answeredQuestions = props.questionIds.filter((id)=>
+                                                        props.questions[id].optionOne.votes.includes(props.authedUser)||
+                                                        props.questions[id].optionTwo.votes.includes(props.authedUser))
 
-  const newQns = props.questionIds.filter((id) => (
-    !doneQns.includes(id)
-  ));
+  const newQuestions = props.questionIds.filter((id)=>
+    !props.questions[id].optionOne.votes.includes(props.authedUser)&&
+    !props.questions[id].optionTwo.votes.includes(props.authedUser))
 
-  console.log(doneQns);
-  console.log(newQns);
+  
 
   return (
-    <div>
-      <div>
-        <input
-          type="radio"
-          value={true}
-          name="toggle"
-          checked={isToggle}
-          onChange={toggleChange}
-        />
-        <label>New Questions</label>
-        <input
-          type="radio"
-          value={false}
-          name="toggle"
-          onChange={toggleChange}
-        />
-        <label>Done</label>
-      </div>
-
-      {isToggle && (
-        <div>
-          <h3 className="center">New Questions</h3>
-          <ul className="dashboard-list">
-            {newQns.map((id) => (
-              <li key={id}>
-                <Question id={id} />
-              </li>
-            ))}
-          </ul>
-        </div>   
-      )}
-
-      {!isToggle && (
-        <div>
-          <h3 className="center">Done</h3>
-          <ul className="dashboard-list">
-            {doneQns.map((id) => (
-              <li key={id}>
-                <Question id={id} />
-              </li>
-            ))}
-          </ul>
+    <div className="dashboard">
+            <div className='toggle-button'>
+                
+                <label for="myCheck">Toggle View</label> 
+                <input type="checkbox" value={true} id="myCheck" onClick={toggleView}></input>
+               
+            </div>
+            <br></br>
+            {toggle &&<div className="New-Questions">
+                <h3>New Questions</h3>
+                
+                <ul className="new-questions-list" >
+                    {newQuestions.map((id) => (
+                        <li key={id} >
+                            <Question id={id} />
+                        </li>
+                    ))}
+                </ul>
+            
+            </div>}
+            {!toggle &&<div className="Answered-Questions">
+                <h3>Answered Questions</h3>
+                
+                  <ul className="answered-questions-list">
+                  
+                  
+                    {answeredQuestions.map((id) => (
+                        <li key={id} >
+                            <Question id={id} />
+                        </li>
+                    ))}
+                  
+                  
+                  </ul>
+                </div>}
+            
         </div>
-      )}
-    </div>
   );
 };
 

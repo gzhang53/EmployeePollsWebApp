@@ -1,42 +1,56 @@
 import {connect} from "react-redux";
 import {useState} from "react";
-import {handleLogin} from "../actions/authedUser";
+import {handleLogin, setAuthedUser} from "../actions/authedUser";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({dispatch}) => {
-    const [username, setUsername] = useState("tylermcginnis");
-    const [password, setPassword] = useState("abc321");
+const Login = ({users, dispatch}) => {
+    const [username, setUsername] = useState('tylermcginnis');
+    const [password, setPassword] = useState('abc321');
+    const navigate = useNavigate();
+    const [invalid, setInvalid] = useState(false)
+    const logIn =()=>{
 
-    const handleUsername = (e) => {
-        const value = e.target.value;
-        setUsername(value);
-    };
+        if (Object.hasOwn(users,username)){
+            if (users[username].password === password){
+                dispatch(setAuthedUser(username));
+            }
+            else{
+                setInvalid(true);
+            }
+        }
+        else{
+            setInvalid(true);
+        }
 
-    const handlePassword = (e) => {
-        const value = e.target.value;
-        setPassword(value);
-    };
+    }
+ 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(handleLogin(username, password));
-        setUsername("");
-        setPassword("");
+        logIn();
     };
+    
     
     return (
         <div className="login-container">
             <h1>Employee Polls</h1>
             <form className="login-form" onSubmit={handleSubmit}>
-            <input type="text" data-testid='username' className="login-input" placeholder="Username" value={username} onChange={handleUsername}/>
-            <input type="password" data-testid='password' className="login-input" placeholder="Password" value={password} onChange={handlePassword}/>
+            <p>Username</p>
+            
+            <input type="text" data-testid='username' className="login-input" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
+            
+            <p>Password</p>
+            <input type="password" data-testid='password' className="login-input" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
             <button type="submit" data-testid='submit' className="login-button">Login</button>
             </form>
+            <div>{invalid && <span data-testid='error-message'>Your username or password is incorrect</span> }</div>
         </div>
     );
 };
 
-const mapStateToProps = ({authedUser}) => ({
-    loggedIn: authedUser !== null,
+const mapStateToProps = ({users,authedUser}) => ({
+    authedUser,
+    users,
 });
 
 export default connect(mapStateToProps)(Login);

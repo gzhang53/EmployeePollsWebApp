@@ -7,10 +7,10 @@ import LoadingBar from "react-redux-loading-bar";
 import NewQuestion from "./components/NewQuestion";
 import QuestionPage from "./components/QuestionPage";
 import Leaderboard from "./components/Leaderboard";
-import Nav from "./components/Nav";
+import Navigation from "./components/Navigation";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
-import Error404 from "./components/Error404";
+import Error from "./components/Error";
 
 function App(props) {
   useEffect(() => {
@@ -22,13 +22,13 @@ function App(props) {
       {props.authedUser !== null && (<Fragment>
         <LoadingBar />
         <div className="container">
-          <Nav />
+          <Navigation />
             <Routes>
               <Route path="/" exact element={<Dashboard />} />
               <Route path="/questions/:id" element={<QuestionPage />} />
               <Route path="/add" element={<NewQuestion />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/Error404" element={<Error404 />} />
+              <Route path="/Error" element={<Error />} />
             </Routes>
         </div>
       </Fragment>)}
@@ -40,7 +40,7 @@ function App(props) {
               <Route path="/questions/:id" element={<Login />} />
               <Route path="/add" element={<Login />} />
               <Route path="/leaderboard" element={<Login />} />
-              <Route path="/Error404" element={<Error404 />} />
+              <Route path="/Error" element={<Error />} />
             </Routes>
         </div>
       </Fragment>)}
@@ -50,7 +50,7 @@ function App(props) {
 }
 
 const mapStateToProps = ({ authedUser, loadingBar }) => ({
-  loading: loadingBar != null && loadingBar.default === 1, // this makes sure that loadingBar state changes to hidden before our login form is shown
+  loading: loadingBar != null && loadingBar.default === true,
   authedUser
 });
 

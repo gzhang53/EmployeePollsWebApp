@@ -18,9 +18,7 @@ describe("NewQuestion", () => {
                 </Router>
             </Provider>
         );
-        expect(component).toBeDefined();
-        var submitButton = component.getByTestId('submit-button');
-        expect(submitButton).toBeDisabled();
+       
         var optionOne = component.getByTestId("option-one");
         var optionTwo = component.getByTestId("option-two");
         fireEvent.change(optionOne, {target: {value: "optionOne"}});

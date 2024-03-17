@@ -3,7 +3,7 @@ let users = {
     id: 'sarahedo',
     password:'password123',
     name: 'Sarah Edo',
-    avatarURL: "https://api.dicebear.com/6.x/adventurer/svg?seed=Callie",
+    avatarURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjL8z5fl9Hp5G5HnXciCvWvc4w5EjY23bLEQ&usqp=CAU",
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionOne',
@@ -16,7 +16,7 @@ let users = {
     id: 'tylermcginnis',
     password:'abc321',
     name: 'Tyler McGinnis',
-    avatarURL: "https://api.dicebear.com/6.x/adventurer/svg?seed=Harley",
+    avatarURL: "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/e2422e989e679c1195c827fb15a15b11-1671404460/f221217%201%201%20x/draw-you-one-realistic-style-cartoon-portrait.jpg",
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -27,7 +27,7 @@ let users = {
     id: 'mtsamis',
     password:'xyz123',
     name: 'Mike Tsamis',
-    avatarURL: "https://api.dicebear.com/6.x/adventurer/svg?seed=Midnight",
+    avatarURL: "https://img.freepik.com/premium-vector/young-man-face-avater-vector-illustration-design_968209-13.jpg",
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -39,7 +39,7 @@ let users = {
     id: 'zoshikanlu',
     password:'pass246',
     name: 'Zenobia Oshikanlu',
-    avatarURL: "https://api.dicebear.com/6.x/adventurer/svg?seed=Jasper",
+    avatarURL: "https://cdn.kwork.com/files/portfolio/t3/57/ef5e3658ff79b6ddb9a68f23133dfd49f08a4a60-1669297757.jpg",
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
     },

@@ -93,14 +93,14 @@ li {
 }
 
 /* Style for each option container */
-.background-voted {
+/* .background-voted {
   background-color: #4ce52d; /* Background color for poll-option */
-}
+/* } */
 
 /* Style for each option container */
-.background-not-voted {
+/* .background-not-voted {
   background-color: #ffffff; /* Background color for poll-option */
-}
+/* } */ */ */
 
 /* Style for text area */
 .poll-textarea {
@@ -122,13 +122,13 @@ li {
   color: white;
   border: none;
   border-radius: 0 0 8px 8px; /* Rounded edges only at the bottom */
-  cursor: pointer;
-}
+  cursor: pointer; 
+} 
 
 /* Add some spacing */
-.poll-option + .poll-option {
+/* .poll-option + .poll-option {
   margin-left: 2%;
-}
+} */
 
 .avatar-big {
   max-width: 100%;

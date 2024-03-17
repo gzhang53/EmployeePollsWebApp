@@ -1,26 +1,34 @@
 import { connect } from "react-redux";
 import { formatQuestion, formatDate } from "../utils/helpers";
 import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Moment from "moment";
+
 
 const Question = (props) => {
   if (props.question === null) {
     return <p>This Question doesn't exist</p>;
   }
 
-  const { name, timestamp, optionOne, optionTwo, avatar, authedUser, id } =
+  const { name,avatar,id} =
     props.question;
-
+  const date = new Date(props.question.timestamp);
   return (
+    
     <Link to={`/questions/${id}`} className="question">
-      <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
-      <div className="question-info">
-        <div>
-          <span>{name}</span>
-          <div>{formatDate(timestamp)}</div>
-          {/* <p>{optionOne.text}</p>
-          <p>{optionTwo.text}</p> */}
-        </div>
-      </div>
+    <Card style={{width:"18 rem"}}>
+        <Card.Body>
+          
+          <Card.Title>{name}</Card.Title>
+          
+          <Card.Text>{Moment(date).format("hh:mm A | MM/DD/YYYY")}</Card.Text>
+          
+          <div style={{display:"flex",justifyContent:"center"}}>
+          <Button   className="show-question" variant="primary">Show</Button>
+          </div>
+        </Card.Body>
+    </Card>
     </Link>
   );
 };

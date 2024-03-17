@@ -1,0 +1,18 @@
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+    
+    
+}
+
+
+.questions-cell{
+    
+    text-align: center;
+}
+
+.answers-cell{
+    
+    text-align: center;
+}

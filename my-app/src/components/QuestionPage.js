@@ -1,67 +1,68 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from "react-redux";
 import { formatQuestion, formatDate } from "../utils/helpers";
 import { Navigate, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { handleAddQuestionAnswer } from "../actions/questions";
+import Card from "react-bootstrap/Card";
+import  Button  from "react-bootstrap/Button";
+
+
+
 
 const QuestionPage = ({dispatch, authedUser, questions, users}) => {
+
   const { id } = useParams();
+    const question = questions[id]
+    const handleOptionOne = (e) => {
+        e.preventDefault();
+        dispatch(handleAddQuestionAnswer(question, "optionOne"));
+      }
+    
+    const handleOptionTwo = (e) => {
+        e.preventDefault();
+        dispatch(handleAddQuestionAnswer(question, "optionTwo"));
+      }
+    
+    const { name, avatar } = formatQuestion(question, users[question.author], authedUser);
+    const VotedOptionOne = question.optionOne.votes.includes(authedUser);
+  	const VotedOptionTwo = question.optionTwo.votes.includes(authedUser);
+  	const Voted = VotedOptionOne || VotedOptionTwo;
 
-  const handleOptionOne = (e) => {
-    e.preventDefault();
-    dispatch(handleAddQuestionAnswer(question, "optionOne"));
-  }
+	  const optionOneVotes = question.optionOne.votes.length;
+	  const optionTwoVotes = question.optionTwo.votes.length;
+    const votes = optionOneVotes + optionTwoVotes;
+    const optionOnePercentage = Math.round(optionOneVotes/votes * 100) + "%"
+    const optionTwoPercentage = Math.round(optionTwoVotes/votes * 100) + "%"
 
-  const handleOptionTwo = (e) => {
-    e.preventDefault();
-    console.log(authedUser)
-    dispatch(handleAddQuestionAnswer(question, "optionTwo"));
-  }
+    return (
 
-  const question = questions[id];
-  if (question == null) {
-    return <Navigate to="/Error404"/>; // need to return this component instead of use navigate
-  }
+        <div className="poll-container">
+        <h3 data-testid="poll-creator">Poll by {name}</h3>
+        <img src={avatar} alt={`Avatar of ${name}`} className="avatar-big" />
+        <h3>Would You Rather</h3>
 
-  const formattedQuestion = formatQuestion(question, users[question.author], authedUser)
-  const { name, optionOne, optionTwo, avatar } = formattedQuestion;
+        <div style={{display:"flex", justifyContent:"space-between"}}>
+                
+                <Card style={{width:"18rem"}} border='info'>
+                <Card.Text style={{width:"95%", padding:"5px"}}>{question.optionOne.text}</Card.Text>
+                <Button   onClick={handleOptionOne} disabled={Voted}><p>Vote</p></Button>
+                {Voted && <p>{question.optionOne.votes.length} Votes - {optionOnePercentage}</p>}
+                {VotedOptionOne && <p>You chose thdis option</p>}
+                </Card>
 
-  const hasVotedOptionOne = question.optionOne.votes.includes(authedUser);
-  const hasVotedOptionTwo = question.optionTwo.votes.includes(authedUser);
-  const hasVoted = hasVotedOptionOne || hasVotedOptionTwo;
-  const optionOneVotes = question.optionOne.votes.length;
-  const optionTwoVotes = question.optionTwo.votes.length;
-  const totalVotes = optionOneVotes + optionTwoVotes;
-  const optionOneText = "Votes: " + optionOneVotes.toString() + " (" + Math.round(100 * optionOneVotes/totalVotes) +  "%)";
-  const optionTwoText = "Votes: " + optionTwoVotes.toString() + " (" + Math.round(100 * optionTwoVotes/totalVotes) +  "%)";
+                <Card style={{width:"18rem"}}border='info' >
+                <Card.Text style={{width:"95%"}} >{question.optionTwo.text}</Card.Text>
+                <Button variant="primary"  onClick={handleOptionTwo} disabled={Voted}><p>Vote</p></Button>
+                {Voted && <p>{question.optionTwo.votes.length} Votes - {optionTwoPercentage}</p>}
+                {VotedOptionTwo && <p>You voted this option</p>}
+                </Card>
+            </div>
+      
+    </div>
+    
+    )
 
-  return (
-  <div className="poll-container">
-    <h3 data-testid="poll-header">Poll by {name}</h3>
-    <img src={avatar} alt={`Avatar of ${name}`} className="avatar-big" />
-    <h3>Would You Rather</h3>
-    {!hasVoted && (<div className="poll-options">
-      <div className="poll-option">
-        <p className="poll-textarea">{optionOne.text}</p>
-        <button onClick={handleOptionOne} className="poll-button">Vote</button>
-      </div>
-      <div className="poll-option">
-        <p className="poll-textarea">{optionTwo.text}</p>
-        <button onClick={handleOptionTwo} className="poll-button">Vote</button>
-      </div>
-    </div>)}
-    {hasVoted && (<div className="poll-options">
-      <div className={`poll-option ${hasVotedOptionOne ? 'background-voted' : 'background-not-voted'}`}>
-        <p>{optionOne.text}</p>
-        <p data-testid="optionOne">{optionOneText}</p>
-      </div>
-      <div className={`poll-option ${hasVotedOptionTwo ? 'background-voted' : 'background-not-voted'}`}>
-        <p>{optionTwo.text}</p>
-        <p data-testid="optionTwo">{optionTwoText}</p>
-      </div>
-    </div>)}
-  </div>
-  );
 };
 
 const mapStateToProps = ({ authedUser, users, questions }) => {

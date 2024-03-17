@@ -1,0 +1,28 @@
+ul.nav-bar{
+
+    
+    background-color: rgb(81, 233, 239);
+    border-radius: 18rem;
+    padding-left: 10%;
+    padding-right: 10%;
+
+   
+}
+
+
+ul.nav-bar li a{
+
+    
+    font-size: medium;
+   
+    text-decoration: none;
+    color: rgba(236, 10, 127, 0.674);
+    
+}
+
+ul.nav-bar li a:hover{
+    
+    
+    font-weight: 900;
+}
+

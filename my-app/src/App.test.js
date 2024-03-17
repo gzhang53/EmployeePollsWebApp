@@ -10,7 +10,7 @@ import { render } from "@testing-library/react";
 const store = createStore(reducer, middleware);
 
 describe("App.js", () => {
-  it("should render App component", () => {
+  it("render App component", () => {
       const component = render(
           <Provider store={store}>
               <Router>
